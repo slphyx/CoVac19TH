@@ -13,7 +13,6 @@ covid<-function(t, Y, parameters)
          HC <- Y[HCindex]
          C <- Y[Cindex]
          CM <- Y[CMindex]
-         #V <- Y[Vindex]
          SV <- Y[SVindex]
          EV <- Y[EVindex]
          IV <- Y[IVindex]
@@ -35,7 +34,6 @@ covid<-function(t, Y, parameters)
          CMC <- Y[CMCindex]
          VacP <- Y[VacPindex]
          P <- (S+E+I+R+X+SV+EV+IV+CLV+HV+ICUV+VentV+RV+H+HC+QS+QE+QI+QR+CL+QC+ICU+ICUC+Vent+VentC)
-         # print(sum(P))
          
          # health system performance
          f <- c(1,(1+give)/2,(1-give)/2,0)
@@ -51,7 +49,6 @@ covid<-function(t, Y, parameters)
          critH<-min(1-fH(sum(H)+sum(ICUC))+(1-reporth),1)
          crit<-min(1-fICU(sum(ICU)+sum(Vent)+sum(VentC)),1)
          critV<-min(1-fVent(sum(Vent)),1)
-         # print(fH(sum(H)))
          
          # interventions
          isolation<-(t>=selfis_on)*(t<=selfis_on+selfis_dur)
@@ -63,11 +60,7 @@ covid<-function(t, Y, parameters)
          vaccine<-(t>=(vaccine_on))*(t<=vaccine_on+vac_campaign)
          
          travelban<-(t>=travelban_on)*(t<=(travelban_on+travelban_dur))+(t>=travelban_on+travelban_dur+import_dur)*(t<=(travelban_on+travelban_dur+import_dur+travelban_dur2))
-         # if(travelban==1){
-         #   print(paste("t:",t))
-         # }
-         
-         #travelban<-(t>=travelban_on)*(t<=(travelban_on+travelban_dur))
+
          screen<-(t>=screen_on)*(t<=(screen_on+screen_dur))
          quarantine<-(t>=quarantine_on)*(t<=(quarantine_on+quarantine_dur))
          lockdown_low<-(t>=lockdown_low_on)*(t<=(lockdown_low_on+lockdown_low_dur))
@@ -121,7 +114,10 @@ covid<-function(t, Y, parameters)
          else{
            if (workhome){
              work<-work_cov*work_eff
-           }else{work<-1}
+           }
+           else{
+             work<-1
+           }
            if (isolation){
              selfis<-selfis_cov
              if(screen){
@@ -157,7 +153,8 @@ covid<-function(t, Y, parameters)
          
          
          # contact matrices
-         cts<-(contact_home+distancing*(1-dist)*contact_other+(1-distancing)*contact_other
+         cts<-(
+               contact_home+distancing*(1-dist)*contact_other+(1-distancing)*contact_other
                +(1-schoolclose)*contact_school # school on
                +schoolclose*(1-school)*contact_school # school close
                +schoolclose*contact_home*school*s2h # inflating contacts at home when school closes
@@ -192,12 +189,10 @@ covid<-function(t, Y, parameters)
          dRdt <- nui*I-omega*R+nui*X+nui*CL+ageing%*%R-mort*R + (1/quarantine_days)*QR + nus*(1-pdeath_h*ifr[,2])*H + (1-pdeath_icu*ifr[,2])*nu_icu*ICU + (1-pdeath_icuc*ifr[,2])*nu_icuc*ICUC + (1-pdeath_hc*ifr[,2])*nusc*HC + (1-pdeath_vent*ifr[,2])*nu_vent*Vent+ (1-pdeath_ventc*ifr[,2])*nu_ventc*VentC - vaccinate*R*AgeVac + omegav*RV
          dXdt <- gamma*selfis*pclin*(1-ihr[,2])*E+gamma*(1-pclin)*screen_eff*(1-ihr[,2])*E-nui*X+ageing%*%X-mort*X 
          ############
-         #dVdt <- vaccinate*S -(1-vaccine_eff)*lam*V +ageing%*%V - mort*V
          
          #to add terms (vaccine_eff1=%reduction in infection, vaccine_eff2=%reduction in duration of infection, vaccine_eff3=%reduction in risk of sevrerity, hospitalisation in this case, but we have hospi, ICU and ICUVent [need to clarify the effect of vac])
          #SV, EV, IV, CL,HV,ICUV, VentV, RV set initial condition
          #
-         #if (vaccine){cf
          #Add vaccine compartment - add (AgeVac*)S*vaccinate to dSdt and dSVdt
          dSVdt <- S*vaccinate*AgeVac - (1-vaccine_eff1)*SV*lam + ageing%*%SV-mort*SV-omegav*SV #Assuming the lam is the same as general population
          

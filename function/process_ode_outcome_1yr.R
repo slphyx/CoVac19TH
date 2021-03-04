@@ -89,7 +89,6 @@ process_ode_outcome_1yr <- function(out){
   VacPsum<-rowSums(out[,(VacPindex+1)])
   #New mortality
   Death_oth<-out[,631:651]*mort
-  #Death_oth<-out.vaceff_0[,631:651]*mort
   ##########################    CALCULATE MORTALITY 
   cinc_mort_H1 <- cumsum(rowSums(parameters["nus"]*parameters["pdeath_h"]*(out[,(Hindex+1)]%*%ifr[,2])))#+ out[,(Hindex+1)]%*%mort))
   + cumsum(rowSums(parameters["nus"]*parameters["pdeath_h"]*(out[,(HVindex+1)]%*%ifr[,2]))) #+ out[,(HVindex+1)]%*%mort))
@@ -147,10 +146,6 @@ process_ode_outcome_1yr <- function(out){
   
   Daily_mort_all_ag    <-Daily_mort_Asym_ag+Daily_mort_MildMod_ag+Daily_mort_ICU_ag+Daily_mort_Vent_ag
   
-  #out[401:405,(Ventindex+1)]        
-  #out[401:405,(Ventindex+1)]*ifr[,2]
-  #out[401:405,(Ventindex+1)]%*%diag(ifr[,2])
-  
   # Export in a cohesive format ----
   results <- list()
   results$time <- startdate + times  # dates
@@ -171,7 +166,6 @@ process_ode_outcome_1yr <- function(out){
   #Outcomes to export
   results$Outcomes_mean1 <- matrix(NA,22,7) #  Vac_pop + 6 outputs (vac_pop, asym, sym, hosp, icu, icuven, death) * 5 years (2020-2024) = 31 in total
   #index 589-609
-  #results$Outcomes_mean1[1,1] <- last(round(VacPsum[,1]))
   results$Outcomes_mean1[1,1] <- last(round(VacP[,1]))
   results$Outcomes_mean1[2,1] <- last(round(VacP[,2]))
   results$Outcomes_mean1[3,1] <- last(round(VacP[,3]))
@@ -210,7 +204,6 @@ process_ode_outcome_1yr <- function(out){
   
   #Classified to 4 age groups: 0-19 (bin 1-4), 20-39 (bin 5-8), 40-64 (bin 9-13), 65+ (bin 14-21) with different year
   results$Outcomes_mean_4gr1yr <- matrix(NA,5,7) #  Vac_pop + 6 outputs (vac_pop, asym, sym, hosp, icu, icuven, death) * 5 years (2020-2024) = 31 in total
-  #results$Outcomes_mean_4gr1yr[1,1] <-last(round(VacPsum))
   print(sum(results$Outcomes_mean1[1:4,1]))
   
   results$Outcomes_mean_4gr1yr[1,1] <- sum(results$Outcomes_mean1[1:4,1]) 
@@ -259,7 +252,6 @@ process_ode_outcome_1yr <- function(out){
   
   #Classified to 4 age groups: 0-19 (bin 1-4), 20-39 (bin 5-8), 40-64 (bin 9-13), 65+ (bin 14-21)
   results$Outcomes_mean_4gr1 <- matrix(NA,5,7) #  Vac_pop + 6 outputs (vac_pop, asym, sym, hosp, icu, icuven, death) * 5 years (2020-2024) = 31 in total
-  #results$Outcomes_mean_4gr1[1,1] <-last(round(VacPsum))
   results$Outcomes_mean_4gr1[1,1] <- sum(results$Outcomes_mean1[1:4,1])
   results$Outcomes_mean_4gr1[2,1] <- sum(results$Outcomes_mean1[5:8,1])
   results$Outcomes_mean_4gr1[3,1] <- sum(results$Outcomes_mean1[9:13,1])
