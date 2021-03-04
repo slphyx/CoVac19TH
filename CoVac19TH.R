@@ -117,21 +117,3 @@ lines(Vac_Eff1_10M_AgeEld_70_sd40imp10[["time"]], Vac_Eff1_10M_AgeEld_70_sd40imp
 lines(Vac_Eff3_10M_AgeEld_99_sd40imp10[["time"]], Vac_Eff3_10M_AgeEld_99_sd40imp10[["daily_incidence"]], col="7")
 lines(Vac_Eff1_10M_AgeHig_70_sd0imp10[["time"]], Vac_Eff1_10M_AgeHig_70_sd0imp10[["daily_incidence"]], col="8")
 lines(Vac_Eff1_10M_AgeHig_90_sd0imp10[["time"]], Vac_Eff1_10M_AgeHig_90_sd0imp10[["daily_incidence"]], col="9")
-
-library(ggplot2)
-
-attach(Baseline_w_sd_0_imp10)
-
-data <- data.frame(Baseline_w_sd_0_imp10[["time"]],Baseline_w_sd_0_imp10[["daily_incidence"]])
-
-plot(time,daily_incidence)
-
-names(data)[1] <- "time"
-names(data)[2] <- "daily_incidence"
-
-ggplot(data, aes(x=time, y=daily_incidence))+ 
-  geom_line()
-
-
-
-
