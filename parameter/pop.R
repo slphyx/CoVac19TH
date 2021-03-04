@@ -13,13 +13,11 @@ mort <- THpop %>%
 ihr <- mort_sever_default %>% 
   select(age_category, ihr) %>% 
   as.data.frame()
-#to adjust IHR 
-#ihr<-ihr*3 #3
-#ihr[,2]<-mean(ihr[,2]*3)
+
 ifr <- mort_sever_default %>% 
   select(age_category, ifr) %>% 
   as.data.frame()
-#ifr[,2]<-mean(ifr[,2])
+
 
 
 

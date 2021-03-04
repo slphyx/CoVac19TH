@@ -1,9 +1,6 @@
 #########   INITIALISE SIMULATION/INTERVENTION START TIMES
 startdate<-as.Date("2021-01-01") 
-# stopdate<-Sys.Date() # today
 stopdate<-as.Date("2023-12-31")
-#stopdate<-as.Date("2025-12-31") #defult ("2020-12-31)
-# stopdate<-as.Date("2020-03-18")
 day_start <- as.numeric(startdate-startdate)
 day_stop <- as.numeric(stopdate-startdate)
 times <- seq(day_start, day_stop)
@@ -21,7 +18,6 @@ date_cocoon_on<-as.Date("2121-12-14")
 # date to start screening
 date_screen_on<-as.Date("2121-12-21")
 # date to start voluntary quarantine
-#date_quarantine_on<-as.Date("2020-03-15")
 date_quarantine_on<-as.Date("2121-12-19")
 # date to start lockdown low 
 date_lockdown_low_on<-as.Date("2121-12-20")
