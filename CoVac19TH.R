@@ -94,7 +94,7 @@ sum(popstruc[14:21,2])
 #######TEST RUN#######
 Baseline_w_sd_0_imp10<-VacTPP_all_scens_4(NoVac,0,0,0,0,1,2,0,4.8)
 Baseline_w_sd_40_imp10<-VacTPP_all_scens_4(NoVac,0,0,0,0,1,2,0.4,4.8)
-#Baseline_w_sd_30_imp10<-VacTPP_all_scens_4(NoVac,0,0,0,0,1,2,0.3,4.8)
+
 Vac_Eff1_10M_AgeHig_70_sd40imp10<-VacTPP_all_scens_4(AgeHighI,0.52163,0.7,0,0,1,2,0.4,4.8)
 Vac_Eff3_10M_AgeEld_70_sd40imp10<-VacTPP_all_scens_4(AgeElder,0.92172,0,0,0.7,1,2,0.4,4.8)
 Vac_Eff3_10M_AgeHig_70_sd40imp10<-VacTPP_all_scens_4(AgeHighI,0.52163,0,0,0.7,1,2,0.4,4.8)
@@ -117,9 +117,14 @@ lines(Vac_Eff1_10M_AgeEld_70_sd40imp10[["time"]], Vac_Eff1_10M_AgeEld_70_sd40imp
 lines(Vac_Eff3_10M_AgeEld_99_sd40imp10[["time"]], Vac_Eff3_10M_AgeEld_99_sd40imp10[["daily_incidence"]], col="7")
 lines(Vac_Eff1_10M_AgeHig_70_sd0imp10[["time"]], Vac_Eff1_10M_AgeHig_70_sd0imp10[["daily_incidence"]], col="8")
 lines(Vac_Eff1_10M_AgeHig_90_sd0imp10[["time"]], Vac_Eff1_10M_AgeHig_90_sd0imp10[["daily_incidence"]], col="9")
+
 library(ggplot2)
 
+attach(Baseline_w_sd_0_imp10)
+
 data <- data.frame(Baseline_w_sd_0_imp10[["time"]],Baseline_w_sd_0_imp10[["daily_incidence"]])
+
+plot(time,daily_incidence)
 
 names(data)[1] <- "time"
 names(data)[2] <- "daily_incidence"
