@@ -1,3 +1,5 @@
+#function to run with different parameter inputs
+
 VacTPP_all_scens_4 <- function(par1, par2, par3, par4, par5, par6, par7, par8, par9){
   AgeVac<<-par1  #AgeAll, AgeAdult, AgeHighI, AgeElder
   parameters["vaccine_cov"] <- par2

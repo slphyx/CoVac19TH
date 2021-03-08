@@ -1,3 +1,5 @@
+###create new model script with 1yr time frame
+
 process_ode_outcome_1yr <- function(out){
   # total population
   pop1<-out[,(Sindex+1)]+out[,(Eindex+1)]+out[,(Iindex+1)]+out[,(CLindex+1)]+out[,(Rindex+1)]+out[,(Xindex+1)]+

@@ -1,3 +1,4 @@
+### MODEL SOLVING EQUARIONS
 
 covid<-function(t, Y, parameters) 
 {
