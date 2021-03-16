@@ -44,7 +44,7 @@ legend("topright", legend=c("No Vaccination ,No social distancing", "No Vaccinat
        col=c("1", "2"), lty=1,cex = 0.5)
 ```
 
-![Pic](/../Tidy/image/Rplot1.png?raw=true "Baseline")
+![Pic](image/Rplot1.png "Baseline")
 
 ```r
 plot(Baseline_w_sd_40_imp10[["time"]],Baseline_w_sd_40_imp10[["daily_incidence"]],xlab="time",ylab="daily_incidence",type="l", col="1",xlim = as.Date(c("2021-01-01","2023-01-01")),ylim =c(0,25000))
@@ -56,7 +56,7 @@ legend("topright", legend=c("No Vaccination", "Vac_Eff1_10M_AgeHig_70_sd40imp10"
 
 ```
 
-![Pic](/../Tidy/image/Rplot2.png?raw=true "Vac Eff1")
+![Pic](image/Rplot2.png "Vac Eff1")
 
 ```r
 plot(Baseline_w_sd_40_imp10[["time"]], Baseline_w_sd_40_imp10[["daily_incidence"]], col="1",xlab="time",ylab="daily_incidence",type="l",xlim = as.Date(c("2021-01-01","2023-01-01")),ylim = c(0,25000))
@@ -67,4 +67,4 @@ legend("topright", legend=c("No Vaccination", "Vac_Eff3_10M_AgeEld_70_sd40imp10"
        col=c("1", "2","3","4"), lty=1,cex = 0.5)
 ```
 
-![Pic](/../Tidy/image/Rplot3.png?raw=true "Vac Eff3")
+![Pic](image/Rplot3.png "Vac Eff3")
